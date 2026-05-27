@@ -38,46 +38,85 @@ canvas { display: block; max-width: 100%; height: auto; }
     border-radius: 8px;
     padding: 20px;
     color: #fff;
-    min-width: 240px;
+    min-width: 260px;
+    max-width: 280px;
 }
 .sidebar h3 {
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     color: #e94560;
     font-size: 16px;
     border-bottom: 1px solid #333;
-    padding-bottom: 8px;
+    padding-bottom: 6px;
 }
 .sidebar .score-box {
     text-align: center;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
     color: #0f0;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 .sidebar .player-name {
     text-align: center;
     font-size: 13px;
     color: #e94560;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 .sidebar .level-box {
     text-align: center;
     font-size: 14px;
     color: #aaa;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
-/* 榜单 Tab 切换 */
+/* 状态 Buff 显示 */
+.buff-list {
+    margin-bottom: 10px;
+    min-height: 22px;
+}
+.buff-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 2px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: bold;
+    animation: buffPulse 0.8s ease-in-out infinite alternate;
+}
+.buff-wallpass  { background: #7c3aed; color: #fff; }
+.buff-reverse   { background: #dc2626; color: #fff; animation-duration: 0.4s; }
+.buff-mud       { background: #92400e; color: #fff; }
+@keyframes buffPulse { from { opacity: 1; } to { opacity: 0.6; } }
+
+/* 道具图例 */
+.item-legend {
+    margin-bottom: 10px;
+    padding: 8px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 6px;
+    font-size: 11px;
+    color: #888;
+    line-height: 1.8;
+}
+.item-legend span { margin-right: 2px; }
+.item-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin: 0 2px;
+}
+
+/* 榜单 Tab */
 .leaderboard-tabs {
     display: flex;
     gap: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 .leaderboard-tab {
     flex: 1;
-    padding: 6px 4px;
-    font-size: 12px;
+    padding: 5px 4px;
+    font-size: 11px;
     border: 1px solid #333;
     border-radius: 4px;
     background: transparent;
@@ -93,20 +132,19 @@ canvas { display: block; max-width: 100%; height: auto; }
     border-color: #e94560;
 }
 .leaderboard-tab:hover:not(.active) { color: #ccc; border-color: #555; }
-
 .sidebar .leaderboard-list {
     list-style: none;
-    max-height: 240px;
+    max-height: 180px;
     overflow-y: auto;
 }
 .sidebar .leaderboard-list li {
     display: flex;
     justify-content: space-between;
-    padding: 5px 8px;
+    padding: 4px 7px;
     margin: 2px 0;
     background: #0f3460;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1.4;
 }
 .sidebar .leaderboard-list li:nth-child(1) { color: #ffd700; }
@@ -116,18 +154,18 @@ canvas { display: block; max-width: 100%; height: auto; }
     text-align: center;
     color: #666;
     font-size: 12px;
-    padding: 20px 0;
+    padding: 16px 0;
 }
 .leaderboard-note {
-    margin-top: 8px;
-    font-size: 11px;
+    margin-top: 6px;
+    font-size: 10px;
     color: #555;
     text-align: center;
 }
 .refresh-btn {
     display: block;
-    margin: 8px auto 0;
-    padding: 4px 16px;
+    margin: 6px auto 0;
+    padding: 4px 14px;
     font-size: 11px;
     border: 1px solid #444;
     border-radius: 4px;
@@ -137,11 +175,10 @@ canvas { display: block; max-width: 100%; height: auto; }
     font-family: inherit;
 }
 .refresh-btn:hover { color: #fff; border-color: #777; }
-
 .controls-hint {
-    margin-top: 12px;
-    font-size: 12px;
-    color: #666;
+    margin-top: 10px;
+    font-size: 11px;
+    color: #555;
     text-align: center;
 }
 
@@ -160,20 +197,16 @@ canvas { display: block; max-width: 100%; height: auto; }
 }
 .overlay.hidden { display: none; }
 .overlay .title { font-size: 32px; color: #e94560; margin-bottom: 8px; }
-.overlay .subtitle { font-size: 14px; color: #ccc; margin-bottom: 20px; }
+.overlay .subtitle { font-size: 14px; color: #ccc; margin-bottom: 18px; }
 
 /* 昵称输入 */
 .nickname-wrap {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
-.nickname-wrap label {
-    font-size: 13px;
-    color: #aaa;
-    margin-bottom: 6px;
-}
+.nickname-wrap label { font-size: 13px; color: #aaa; margin-bottom: 6px; }
 .nickname-input {
     width: 200px;
     padding: 8px 12px;
@@ -188,27 +221,17 @@ canvas { display: block; max-width: 100%; height: auto; }
     transition: border-color 0.2s;
 }
 .nickname-input:focus { border-color: #e94560; }
-.nickname-error {
-    font-size: 12px;
-    color: #f66;
-    margin-top: 4px;
-    min-height: 18px;
-}
+.nickname-error { font-size: 12px; color: #f66; margin-top: 4px; min-height: 18px; }
 
 .overlay .over-score { font-size: 20px; color: #0f0; margin-bottom: 4px; }
-.overlay .over-level { font-size: 14px; color: #aaa; margin-bottom: 14px; }
-
-.overlay .over-leaderboard {
-    width: 280px;
-    margin-bottom: 14px;
-}
+.overlay .over-level { font-size: 14px; color: #aaa; margin-bottom: 12px; }
+.overlay .over-leaderboard { width: 280px; margin-bottom: 12px; }
 .overlay .over-leaderboard h4 {
     text-align: center; color: #e94560; margin-bottom: 6px; font-size: 14px;
 }
 .overlay .over-leaderboard ol {
     list-style: none; font-size: 12px;
-    max-height: 200px;
-    overflow-y: auto;
+    max-height: 160px; overflow-y: auto;
 }
 .overlay .over-leaderboard ol li {
     display: flex; justify-content: space-between;
@@ -219,9 +242,7 @@ canvas { display: block; max-width: 100%; height: auto; }
 .overlay .over-leaderboard ol li:nth-child(1) { color: #ffd700; }
 .overlay .over-leaderboard ol li:nth-child(2) { color: #c0c0c0; }
 .overlay .over-leaderboard ol li:nth-child(3) { color: #cd7f32; }
-.overlay .over-nickname {
-    font-size: 14px; color: #e94560; margin-bottom: 4px;
-}
+.overlay .over-nickname { font-size: 14px; color: #e94560; margin-bottom: 4px; }
 
 .btn {
     padding: 10px 30px;
@@ -239,7 +260,7 @@ canvas { display: block; max-width: 100%; height: auto; }
 .btn-restart:hover:not(:disabled) { background: #1a4a7a; }
 .overlay .hint { font-size: 12px; color: #666; margin-top: 10px; }
 
-/* Toast 提示 */
+/* Toast */
 .toast {
     position: fixed;
     bottom: 30px;
@@ -253,11 +274,9 @@ canvas { display: block; max-width: 100%; height: auto; }
     z-index: 999;
     pointer-events: none;
     transition: opacity 0.3s;
-    font-family: "Microsoft YaHei", "SimHei", "PingFang SC", Arial, sans-serif;
+    font-family: "Microsoft YaHei","SimHei","PingFang SC",Arial,sans-serif;
 }
 .toast.hidden { opacity: 0; }
-
-/* 加载旋转器 */
 .spinner {
     display: inline-block;
     width: 16px; height: 16px;
@@ -271,12 +290,7 @@ canvas { display: block; max-width: 100%; height: auto; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ========== 虚拟方向键 ========== */
-.dpad {
-    display: none;
-    margin-top: 16px;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-}
+.dpad { display: none; margin-top: 16px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .dpad-grid {
     display: grid;
     grid-template-columns: 70px 70px 70px;
@@ -285,8 +299,7 @@ canvas { display: block; max-width: 100%; height: auto; }
     justify-content: center;
 }
 .dpad-btn {
-    width: 70px;
-    height: 70px;
+    width: 70px; height: 70px;
     border: 2px solid #444;
     border-radius: 10px;
     background: #1a1a3e;
@@ -301,15 +314,11 @@ canvas { display: block; max-width: 100%; height: auto; }
     -webkit-user-select: none;
     user-select: none;
 }
-.dpad-btn:active,
-.dpad-btn.active {
-    background: #e94560;
-    color: #fff;
-    transform: scale(0.92);
-    border-color: #e94560;
+.dpad-btn:active, .dpad-btn.active {
+    background: #e94560; color: #fff;
+    transform: scale(0.92); border-color: #e94560;
 }
 .dpad-empty { background: transparent; border: none; pointer-events: none; }
-
 .dpad-up    { grid-column: 2; grid-row: 1; }
 .dpad-left  { grid-column: 1; grid-row: 2; }
 .dpad-center{ grid-column: 2; grid-row: 2; }
@@ -318,47 +327,28 @@ canvas { display: block; max-width: 100%; height: auto; }
 
 /* ========== 手机端响应式 ========== */
 @media (max-width: 768px) {
-    .game-wrapper {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        padding: 8px;
-    }
-    .game-container {
-        max-width: 95vw;
-        border-width: 2px;
-    }
+    .game-wrapper { flex-direction: column; align-items: center; gap: 12px; padding: 8px; }
+    .game-container { max-width: 95vw; border-width: 2px; }
     canvas { max-width: 100%; height: auto; }
-    .sidebar {
-        width: 100%;
-        max-width: 95vw;
-        min-width: auto;
-        padding: 14px;
-        order: 1;
-    }
-    .sidebar h3 { font-size: 14px; margin-bottom: 8px; padding-bottom: 5px; }
-    .sidebar .score-box { font-size: 22px; margin-bottom: 4px; }
-    .sidebar .level-box { font-size: 12px; margin-bottom: 10px; }
-    .sidebar .leaderboard-list li { padding: 4px 6px; font-size: 11px; }
-    .sidebar .leaderboard-list { max-height: 160px; }
+    .sidebar { width: 100%; max-width: 95vw; min-width: auto; padding: 12px; order: 1; }
+    .sidebar h3 { font-size: 13px; margin-bottom: 6px; padding-bottom: 4px; }
+    .sidebar .score-box { font-size: 22px; }
+    .sidebar .level-box { font-size: 12px; margin-bottom: 8px; }
+    .sidebar .leaderboard-list { max-height: 130px; }
+    .sidebar .leaderboard-list li { padding: 3px 5px; font-size: 10px; }
     .controls-hint { display: none; }
     .dpad { display: block; }
     .overlay .title { font-size: 24px; }
-    .overlay .subtitle { font-size: 13px; margin-bottom: 16px; }
+    .overlay .subtitle { font-size: 13px; margin-bottom: 14px; }
     .overlay .over-score { font-size: 17px; }
     .overlay .over-level { font-size: 12px; }
     .overlay .over-leaderboard { width: 240px; }
-    .overlay .over-leaderboard ol { max-height: 140px; font-size: 11px; }
+    .overlay .over-leaderboard ol { max-height: 120px; font-size: 11px; }
     .btn { padding: 8px 24px; font-size: 14px; }
     .nickname-input { width: 170px; font-size: 14px; }
 }
-
 @media (max-width: 380px) {
-    .dpad-grid {
-        grid-template-columns: 55px 55px 55px;
-        grid-template-rows: 55px 55px 55px;
-        gap: 3px;
-    }
+    .dpad-grid { grid-template-columns: 55px 55px 55px; grid-template-rows: 55px 55px 55px; gap: 3px; }
     .dpad-btn { width: 55px; height: 55px; font-size: 20px; }
 }
 </style>
@@ -366,35 +356,47 @@ canvas { display: block; max-width: 100%; height: auto; }
 <body>
 
 <div class="game-wrapper">
-    <!-- 侧边栏信息面板 -->
+    <!-- 侧边栏 -->
     <div class="sidebar">
         <h3>📊 游戏信息</h3>
         <div class="score-box" id="sidebarScore">0</div>
         <div class="player-name" id="sidebarPlayer"></div>
         <div class="level-box">等级: <span id="sidebarLevel">1</span></div>
 
-        <!-- 榜单 Tab 切换 -->
+        <!-- 状态 Buff -->
+        <div class="buff-list" id="buffList"></div>
+
+        <!-- 道具图例 -->
+        <div class="item-legend">
+            <span><span class="item-dot" style="background:#f00"></span>普通</span>
+            <span><span class="item-dot" style="background:#ffd700"></span>金+30</span>
+            <span><span class="item-dot" style="background:#0ff"></span>减速</span>
+            <span><span class="item-dot" style="background:#a855f7"></span>穿墙</span>
+            <span><span class="item-dot" style="background:#ef4444"></span>颠倒</span>
+            <span><span class="item-dot" style="background:#92400e"></span>泥沼</span>
+        </div>
+
+        <!-- 榜单 Tab -->
         <div class="leaderboard-tabs">
             <button class="leaderboard-tab active" data-tab="cloud">☁️ 云端总榜</button>
             <button class="leaderboard-tab" data-tab="local">💻 本地个人</button>
         </div>
-
         <ul class="leaderboard-list" id="sidebarLeaderboard">
             <li class="leaderboard-empty">加载中...</li>
         </ul>
         <div class="leaderboard-note" id="leaderboardNote"></div>
         <button class="refresh-btn" id="btnRefresh">🔄 刷新榜单</button>
-        <div class="controls-hint">↑↓←→ 控制方向</div>
+        <div class="controls-hint">↑↓←→ / WASD 控制</div>
     </div>
 
     <!-- 游戏画布 -->
     <div class="game-container" id="gameContainer">
         <canvas id="gameCanvas"></canvas>
 
-        <!-- 开始覆盖层（含昵称输入） -->
+        <!-- 开始覆盖层 -->
         <div class="overlay" id="startOverlay">
             <div class="title">🐍 贪吃蛇</div>
-            <div class="subtitle">使用方向键 / 虚拟按键控制蛇的移动</div>
+            <div class="subtitle">方向键 / 虚拟按键控制 · 彩色方块是特殊道具</div>
             <div class="nickname-wrap">
                 <label for="nicknameInput">请输入你的昵称</label>
                 <input type="text" class="nickname-input" id="nicknameInput"
@@ -435,7 +437,6 @@ canvas { display: block; max-width: 100%; height: auto; }
     </div>
 </div>
 
-<!-- Toast 提示 -->
 <div class="toast hidden" id="toast"></div>
 
 <script>
@@ -457,10 +458,21 @@ canvas { display: block; max-width: 100%; height: auto; }
         'X-Master-Key': JSONBIN_API_KEY,
         'Content-Type': 'application/json'
     };
-
-    // 本地存储 key
     const LOCAL_LEADERBOARD_KEY = 'snake_local_leaderboard_v3';
     const LOCAL_NICKNAME_KEY = 'snake_nickname';
+
+    // ================================================
+    //  特殊道具系统 - 配置
+    // ================================================
+    // 道具类型枚举
+    const ITEM_TYPES = {
+        GOLD:     { id:'gold',     name:'金色食物', color:'#ffd700', icon:'$',  score:30, speedDelta:0,  prob:0.15, lifetime:7000,  desc:'+30分不加速' },
+        SLOW:     { id:'slow',     name:'减速道具', color:'#00e5ff', icon:'❄', score:0,  speedDelta:-3, prob:0.10, lifetime:6000,  desc:'速度-3' },
+        WALLPASS: { id:'wallpass', name:'穿墙道具', color:'#a855f7', icon:'⟳', score:0,  speedDelta:0,  prob:0.05, lifetime:5000,  desc:'5秒穿墙', effectDuration:5000 },
+        REVERSE:  { id:'reverse',  name:'颠倒道具', color:'#ef4444', icon:'↺', score:0,  speedDelta:0,  prob:0.08, lifetime:5000,  desc:'3秒方向颠倒', effectDuration:3000 },
+        MUD:      { id:'mud',      name:'泥沼陷阱', color:'#d97706', icon:'≈', score:0,  speedDelta:0,  prob:0.10, lifetime:7000,  desc:'3×3减速区8秒', zoneDuration:8000 }
+    };
+    const ITEM_COOLDOWN = 10000; // 道具消失后10秒冷却
 
     // ==================== DOM 元素 ====================
     const canvas = document.getElementById('gameCanvas');
@@ -484,6 +496,7 @@ canvas { display: block; max-width: 100%; height: auto; }
     const nicknameErrorEl = document.getElementById('nicknameError');
     const dpad = document.getElementById('dpad');
     const toastEl = document.getElementById('toast');
+    const buffListEl = document.getElementById('buffList');
 
     // ==================== 游戏状态 ====================
     let snake = [];
@@ -496,19 +509,24 @@ canvas { display: block; max-width: 100%; height: auto; }
     let gameStarted = false;
     let animationId = null;
     let playerNickname = '';
-    let cloudOnline = false;          // 云端是否可用
-    let currentLeaderboardTab = 'cloud';  // 'cloud' | 'local'
+    let cloudOnline = false;
+    let currentLeaderboardTab = 'cloud';
 
-    // ==================== Toast 提示 ====================
+    // ---- 道具系统状态 ----
+    let specialItem = null;           // 当前屏幕上的特殊道具 { type, x, y, spawnTime }
+    let itemCooldownUntil = 0;        // 冷却结束时间戳
+    let wallPassUntil = 0;            // 穿墙效果结束时间戳
+    let reverseUntil = 0;             // 颠倒效果结束时间戳
+    let mudZones = [];                // 泥沼区域 [{x, y, until}]
+
+    // ==================== Toast ====================
     let toastTimer = null;
     function showToast(msg, duration) {
         duration = duration || 2000;
         if (toastTimer) clearTimeout(toastTimer);
         toastEl.textContent = msg;
         toastEl.classList.remove('hidden');
-        toastTimer = setTimeout(function() {
-            toastEl.classList.add('hidden');
-        }, duration);
+        toastTimer = setTimeout(function() { toastEl.classList.add('hidden'); }, duration);
     }
 
     // ================================================
@@ -518,277 +536,257 @@ canvas { display: block; max-width: 100%; height: auto; }
         if (!name || name.trim() === '') return '昵称不能为空';
         if (name.trim().length < 2) return '昵称至少2个字符';
         if (name.trim().length > 10) return '昵称最多10个字符';
-        // 过滤特殊符号：只允许中英文、数字、下划线、空格
         if (!/^[\u4e00-\u9fa5a-zA-Z0-9_ ]+$/.test(name.trim())) return '昵称含非法字符，仅支持中英文、数字、下划线';
-        // 禁止使用 "system" 作为昵称
         if (name.trim().toLowerCase() === 'system') return '昵称不能为 system';
-        return null; // 校验通过
+        return null;
     }
-
     function getValidatedNickname() {
         var raw = nicknameInput.value;
         var err = validateNickname(raw);
-        if (err) {
-            nicknameErrorEl.textContent = err;
-            return null;
-        }
+        if (err) { nicknameErrorEl.textContent = err; return null; }
         nicknameErrorEl.textContent = '';
         return raw.trim();
     }
-
-    // 恢复上次昵称
     function restoreNickname() {
-        try {
-            var saved = localStorage.getItem(LOCAL_NICKNAME_KEY);
-            if (saved) nicknameInput.value = saved;
-        } catch(e) {}
+        try { var s = localStorage.getItem(LOCAL_NICKNAME_KEY); if (s) nicknameInput.value = s; } catch(e) {}
     }
-    function saveNickname(name) {
-        try {
-            localStorage.setItem(LOCAL_NICKNAME_KEY, name);
-        } catch(e) {}
-    }
+    function saveNickname(name) { try { localStorage.setItem(LOCAL_NICKNAME_KEY, name); } catch(e) {} }
 
     // ================================================
     //  全自动云端排行榜模块 - 本地存储
     // ================================================
     function loadLocalLeaderboard() {
-        try {
-            var data = localStorage.getItem(LOCAL_LEADERBOARD_KEY);
-            if (!data) return [];
-            return JSON.parse(data);
-        } catch(e) { return []; }
+        try { var d = localStorage.getItem(LOCAL_LEADERBOARD_KEY); return d ? JSON.parse(d) : []; } catch(e) { return []; }
     }
-
     function saveLocalLeaderboard(list) {
-        var sorted = list.sort(function(a, b) { return b.score - a.score; }).slice(0, 5);
-        try {
-            localStorage.setItem(LOCAL_LEADERBOARD_KEY, JSON.stringify(sorted));
-        } catch(e) {}
+        var s = list.sort(function(a,b){ return b.score - a.score; }).slice(0, 5);
+        try { localStorage.setItem(LOCAL_LEADERBOARD_KEY, JSON.stringify(s)); } catch(e) {}
     }
-
     function addToLocalLeaderboard(nickname, score, level) {
         var list = loadLocalLeaderboard();
-        list.push({
-            nickname: nickname,
-            score: score,
-            level: level,
-            timestamp: new Date().toISOString()
-        });
+        list.push({ nickname: nickname, score: score, level: level, timestamp: new Date().toISOString() });
         saveLocalLeaderboard(list);
     }
 
     // ================================================
-    //  全自动云端排行榜模块 - JSONBin 云端读写
+    //  全自动云端排行榜模块 - JSONBin 读写
     // ================================================
-    // 从 JSONBin 拉取云端排行榜，过滤 "system" 占位数据，返回按分数降序 TOP20
     async function fetchCloudLeaderboard() {
-        var resp = await fetch(JSONBIN_URL + '/latest', {
-            method: 'GET',
-            headers: { 'X-Master-Key': JSONBIN_API_KEY }
-        });
+        var resp = await fetch(JSONBIN_URL + '/latest', { method: 'GET', headers: { 'X-Master-Key': JSONBIN_API_KEY } });
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
         var json = await resp.json();
-        // JSONBin v3 返回 { record: [...] }
         var data = json.record;
         if (!Array.isArray(data)) data = [];
-        // 过滤掉昵称等于 "system" 的占位数据
-        data = data.filter(function(entry) {
-            return entry.nickname && entry.nickname.toLowerCase() !== 'system';
-        });
-        // 按分数降序，取 TOP20
-        data.sort(function(a, b) { return b.score - a.score; });
+        data = data.filter(function(e) { return e.nickname && e.nickname.toLowerCase() !== 'system'; });
+        data.sort(function(a,b) { return b.score - a.score; });
         return data.slice(0, 20);
     }
-
-    // 提交新记录到云端，自动合并并去重（同一昵称只保留最高分）
     async function submitToCloud(nickname, score, level) {
-        // 1. 先拉取最新数据
-        var resp = await fetch(JSONBIN_URL + '/latest', {
-            method: 'GET',
-            headers: { 'X-Master-Key': JSONBIN_API_KEY }
-        });
+        var resp = await fetch(JSONBIN_URL + '/latest', { method: 'GET', headers: { 'X-Master-Key': JSONBIN_API_KEY } });
         var json = await resp.json();
-        var list = json.record;
-        if (!Array.isArray(list)) list = [];
-
-        // 2. 过滤 system 占位数据
-        list = list.filter(function(entry) {
-            return entry.nickname && entry.nickname.toLowerCase() !== 'system';
-        });
-
-        // 3. 添加/更新当前玩家记录（同一昵称保留最高分）
-        var existingIdx = -1;
-        for (var i = 0; i < list.length; i++) {
-            if (list[i].nickname === nickname) {
-                existingIdx = i;
-                break;
-            }
-        }
-        var newEntry = {
-            nickname: nickname,
-            score: score,
-            level: level,
-            timestamp: new Date().toISOString()
-        };
-        if (existingIdx >= 0) {
-            // 同一昵称取最高分
-            if (score > list[existingIdx].score) {
-                list[existingIdx] = newEntry;
-            }
-        } else {
-            list.push(newEntry);
-        }
-
-        // 4. PUT 整份数据回云端
-        var putResp = await fetch(JSONBIN_URL, {
-            method: 'PUT',
-            headers: JSONBIN_HEADERS,
-            body: JSON.stringify(list)
-        });
+        var list = json.record; if (!Array.isArray(list)) list = [];
+        list = list.filter(function(e) { return e.nickname && e.nickname.toLowerCase() !== 'system'; });
+        var idx = -1;
+        for (var i = 0; i < list.length; i++) { if (list[i].nickname === nickname) { idx = i; break; } }
+        var entry = { nickname: nickname, score: score, level: level, timestamp: new Date().toISOString() };
+        if (idx >= 0) { if (score > list[idx].score) list[idx] = entry; }
+        else { list.push(entry); }
+        var putResp = await fetch(JSONBIN_URL, { method: 'PUT', headers: JSONBIN_HEADERS, body: JSON.stringify(list) });
         if (!putResp.ok) throw new Error('PUT HTTP ' + putResp.status);
     }
-
-    // 带网络异常降级的云端数据拉取
     async function loadCloudLeaderboardSafe() {
-        try {
-            var data = await fetchCloudLeaderboard();
-            cloudOnline = true;
-            return data;
-        } catch(e) {
-            console.warn('[云端排行榜] 网络不可用，降级到本地:', e.message);
-            cloudOnline = false;
-            return null;
-        }
+        try { var d = await fetchCloudLeaderboard(); cloudOnline = true; return d; }
+        catch(e) { console.warn('[云端] 网络不可用:', e.message); cloudOnline = false; return null; }
     }
-
-    // 带网络异常降级的云端数据提交
     async function submitToCloudSafe(nickname, score, level) {
-        try {
-            await submitToCloud(nickname, score, level);
-            cloudOnline = true;
-            showToast('✅ 分数已同步到云端');
-        } catch(e) {
-            console.warn('[云端排行榜] 提交失败，已保存到本地:', e.message);
-            cloudOnline = false;
-            showToast('⚠️ 网络异常，分数已保存到本地');
-        }
+        try { await submitToCloud(nickname, score, level); cloudOnline = true; showToast('✅ 分数已同步到云端'); }
+        catch(e) { console.warn('[云端] 提交失败:', e.message); cloudOnline = false; showToast('⚠️ 网络异常，已保存本地'); }
     }
 
     // ================================================
     //  全自动云端排行榜模块 - UI 渲染
     // ================================================
-    // 格式化时间
     function formatTime(isoStr) {
-        try {
-            var d = new Date(isoStr);
-            var m = d.getMonth() + 1;
-            var day = d.getDate();
-            var h = d.getHours();
-            var min = d.getMinutes();
-            if (min < 10) min = '0' + min;
-            return m + '/' + day + ' ' + h + ':' + min;
-        } catch(e) { return ''; }
+        try { var d = new Date(isoStr); var m = d.getMonth()+1; var day = d.getDate(); var h = d.getHours(); var min = d.getMinutes(); if (min<10) min='0'+min; return m+'/'+day+' '+h+':'+min; } catch(e) { return ''; }
     }
-
-    // 渲染榜单 HTML 到容器
+    function escapeHtml(str) { if (!str) return ''; return str.replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>'); }
     function renderLeaderboardList(container, data, isCloud) {
         container.innerHTML = '';
         if (!data || data.length === 0) {
-            var cls = isCloud ? '暂无云端数据' : '暂无本地记录';
-            container.innerHTML = '<li class="leaderboard-empty">' + cls + '</li>';
+            container.innerHTML = '<li class="leaderboard-empty">' + (isCloud ? '暂无云端数据' : '暂无本地记录') + '</li>';
             return;
         }
-        var maxShow = isCloud ? 20 : 5;
-        var items = data.slice(0, maxShow);
+        var items = data.slice(0, isCloud ? 20 : 5);
         items.forEach(function(entry, i) {
             var li = document.createElement('li');
-            var rank = i + 1;
             var timeStr = entry.timestamp ? formatTime(entry.timestamp) : '';
-            // 格式: 排名 昵称 | 分数 Lv等级 时间
-            li.innerHTML = '<span>' + rank + '. ' + escapeHtml(entry.nickname) + '</span>' +
-                           '<span>' + entry.score + '分 Lv' + entry.level +
-                           (timeStr ? ' <small style="color:#666">' + timeStr + '</small>' : '') + '</span>';
+            li.innerHTML = '<span>' + (i+1) + '. ' + escapeHtml(entry.nickname) + '</span>' +
+                '<span>' + entry.score + '分 Lv' + entry.level + (timeStr ? ' <small style="color:#666">' + timeStr + '</small>' : '') + '</span>';
             container.appendChild(li);
         });
     }
-
-    // 简易 HTML 转义
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>');
-    }
-
-    // 刷新侧边栏当前 Tab 的榜单
     async function refreshSidebarLeaderboard() {
         sidebarLeaderboardEl.innerHTML = '<li class="leaderboard-empty"><span class="spinner"></span>加载中...</li>';
-
         if (currentLeaderboardTab === 'cloud') {
             var cloudData = await loadCloudLeaderboardSafe();
-            if (cloudData) {
-                renderLeaderboardList(sidebarLeaderboardEl, cloudData, true);
-                leaderboardNoteEl.textContent = '☁️ 云端实时数据 · TOP20';
-            } else {
-                // 降级：显示本地数据
-                var localData = loadLocalLeaderboard();
-                renderLeaderboardList(sidebarLeaderboardEl, localData, false);
-                leaderboardNoteEl.textContent = '⚠️ 网络不可用，显示本地数据';
-            }
+            if (cloudData) { renderLeaderboardList(sidebarLeaderboardEl, cloudData, true); leaderboardNoteEl.textContent = '☁️ 云端实时数据 · TOP20'; }
+            else { renderLeaderboardList(sidebarLeaderboardEl, loadLocalLeaderboard(), false); leaderboardNoteEl.textContent = '⚠️ 网络不可用，显示本地数据'; }
         } else {
-            var localData = loadLocalLeaderboard();
-            renderLeaderboardList(sidebarLeaderboardEl, localData, false);
+            renderLeaderboardList(sidebarLeaderboardEl, loadLocalLeaderboard(), false);
             leaderboardNoteEl.textContent = '💻 本设备记录 · 最多5条';
         }
     }
-
-    // 刷新游戏结束覆盖层的两个榜单
     async function refreshGameOverLeaderboards() {
-        // 云端榜
         overCloudList.innerHTML = '<li class="leaderboard-empty"><span class="spinner"></span>加载中...</li>';
         var cloudData = await loadCloudLeaderboardSafe();
         renderLeaderboardList(overCloudList, cloudData, true);
-
-        // 本地榜
-        var localData = loadLocalLeaderboard();
-        renderLeaderboardList(overLocalList, localData, false);
-
+        renderLeaderboardList(overLocalList, loadLocalLeaderboard(), false);
         overNicknameEl.textContent = '玩家: ' + playerNickname;
     }
-
-    // 侧边栏更新（含榜单刷新）
     async function updateSidebar() {
         var level = speed - 9;
         sidebarScoreEl.textContent = score;
         sidebarLevelEl.textContent = level;
         sidebarPlayerEl.textContent = playerNickname ? '玩家: ' + playerNickname : '';
+        updateBuffDisplay();
         await refreshSidebarLeaderboard();
     }
-
-    // 游戏结束覆盖层显示（异步提交 + 刷新榜单）
     async function showGameOverOverlayAsync() {
         var level = speed - 9;
         overScoreEl.textContent = '最终分数: ' + score;
         overLevelEl.textContent = '等级: ' + level;
         overNicknameEl.textContent = '玩家: ' + playerNickname;
-
-        // 先提交到云端和本地（异步进行）
         addToLocalLeaderboard(playerNickname, score, level);
         await submitToCloudSafe(playerNickname, score, level);
-
-        // 刷新展示榜单
         await refreshGameOverLeaderboards();
-
         gameOverOverlay.classList.remove('hidden');
     }
+    function hideOverlays() { startOverlay.classList.add('hidden'); gameOverOverlay.classList.add('hidden'); }
 
-    function hideOverlays() {
-        startOverlay.classList.add('hidden');
-        gameOverOverlay.classList.add('hidden');
+    // ================================================
+    //  特殊道具系统 - Buff 状态显示
+    // ================================================
+    function updateBuffDisplay() {
+        buffListEl.innerHTML = '';
+        var now = Date.now();
+        if (wallPassUntil > now) {
+            var left = Math.ceil((wallPassUntil - now) / 1000);
+            buffListEl.innerHTML += '<span class="buff-tag buff-wallpass">🟣 穿墙 ' + left + 's</span>';
+        }
+        if (reverseUntil > now) {
+            var left = Math.ceil((reverseUntil - now) / 1000);
+            buffListEl.innerHTML += '<span class="buff-tag buff-reverse">🔴 颠倒 ' + left + 's</span>';
+        }
+        if (isInMud()) {
+            buffListEl.innerHTML += '<span class="buff-tag buff-mud">⬛ 泥沼减速</span>';
+        }
     }
 
-    // ==================== 方向设置（统一入口，含反向防呆） ====================
+    // ================================================
+    //  特殊道具系统 - 道具生成
+    // ================================================
+    function trySpawnSpecialItem(now) {
+        // 已有道具或冷却中，不生成
+        if (specialItem) return;
+        if (now < itemCooldownUntil) return;
+
+        // 按概率随机选择道具类型
+        var roll = Math.random();
+        var cumulative = 0;
+        var chosen = null;
+        var types = Object.values(ITEM_TYPES);
+        for (var i = 0; i < types.length; i++) {
+            cumulative += types[i].prob;
+            if (roll < cumulative) { chosen = types[i]; break; }
+        }
+        if (!chosen) return;
+
+        // 找一个不在蛇身上、不在食物上的位置
+        var attempts = 0;
+        while (attempts < 200) {
+            var ix = Math.floor(Math.random() * COLS) * CELL_SIZE;
+            var iy = Math.floor(Math.random() * ROWS) * CELL_SIZE;
+            var onSnake = snake.some(function(s) { return s.x === ix && s.y === iy; });
+            var onFood = (food.x === ix && food.y === iy);
+            if (!onSnake && !onFood) {
+                specialItem = { type: chosen, x: ix, y: iy, spawnTime: now };
+                return;
+            }
+            attempts++;
+        }
+    }
+
+    function clearSpecialItem() {
+        specialItem = null;
+        itemCooldownUntil = Date.now() + ITEM_COOLDOWN;
+    }
+
+    // ================================================
+    //  特殊道具系统 - 效果应用
+    // ================================================
+    function applyItemEffect(itemType) {
+        var now = Date.now();
+        var name = itemType.name;
+        showToast(name + ': ' + itemType.desc, 1500);
+
+        switch (itemType.id) {
+            case 'gold':
+                score += itemType.score;
+                break;
+            case 'slow':
+                speed = Math.max(8, speed + itemType.speedDelta);
+                break;
+            case 'wallpass':
+                wallPassUntil = now + itemType.effectDuration;
+                break;
+            case 'reverse':
+                reverseUntil = now + itemType.effectDuration;
+                break;
+            case 'mud':
+                // 在蛇头周围生成 3×3 泥沼区
+                var head = snake[0];
+                var hx = Math.round(head.x / CELL_SIZE);
+                var hy = Math.round(head.y / CELL_SIZE);
+                // 清除重叠旧泥沼
+                mudZones = mudZones.filter(function(m) { return m.until > now; });
+                for (var dx = -1; dx <= 1; dx++) {
+                    for (var dy = -1; dy <= 1; dy++) {
+                        var mx = (hx + dx) * CELL_SIZE;
+                        var my = (hy + dy) * CELL_SIZE;
+                        if (mx >= 0 && mx < WIDTH && my >= 0 && my < HEIGHT) {
+                            // 去重
+                            if (!mudZones.some(function(m) { return m.x === mx && m.y === my; })) {
+                                mudZones.push({ x: mx, y: my, until: now + itemType.zoneDuration });
+                            }
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
+    function isInMud() {
+        var now = Date.now();
+        var head = snake[0];
+        if (!head) return false;
+        return mudZones.some(function(m) { return m.x === head.x && m.y === head.y && m.until > now; });
+    }
+
+    function getEffectiveSpeed() {
+        return isInMud() ? Math.max(4, Math.floor(speed / 2)) : speed;
+    }
+
+    // ==================== 方向设置（统一入口） ====================
     function setDirection(dx, dy) {
         if (!gameRunning) return;
+
+        // 如果处于颠倒状态，翻转方向
+        if (reverseUntil > Date.now()) {
+            dx = -dx;
+            dy = -dy;
+        }
+
+        // 防止反向移动（基于实际当前方向）
         if (dx !== 0) {
             if (direction.x === -dx) return;
         } else {
@@ -802,10 +800,9 @@ canvas { display: block; max-width: 100%; height: auto; }
         while (true) {
             var x = Math.floor(Math.random() * COLS) * CELL_SIZE;
             var y = Math.floor(Math.random() * ROWS) * CELL_SIZE;
-            var pos = { x: x, y: y };
-            if (!snake.some(function(seg) { return seg.x === x && seg.y === y; })) {
-                return pos;
-            }
+            var onSnake = snake.some(function(s) { return s.x === x && s.y === y; });
+            var onItem = specialItem && specialItem.x === x && specialItem.y === y;
+            if (!onSnake && !onItem) return { x: x, y: y };
         }
     }
 
@@ -814,46 +811,111 @@ canvas { display: block; max-width: 100%; height: auto; }
         ctx.fillStyle = '#000';
         ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
+        // 网格线
         ctx.strokeStyle = '#111';
         ctx.lineWidth = 0.5;
         for (var x = 0; x <= WIDTH; x += CELL_SIZE) {
-            ctx.beginPath();
-            ctx.moveTo(x, 0);
-            ctx.lineTo(x, HEIGHT);
-            ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, HEIGHT); ctx.stroke();
         }
         for (var y = 0; y <= HEIGHT; y += CELL_SIZE) {
-            ctx.beginPath();
-            ctx.moveTo(0, y);
-            ctx.lineTo(WIDTH, y);
-            ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(WIDTH, y); ctx.stroke();
         }
 
-        snake.forEach(function(seg, i) {
-            ctx.fillStyle = (i === 0) ? '#0f0' : '#00f';
-            ctx.fillRect(seg.x + 1, seg.y + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+        // 泥沼区域（先画，在蛇下面）
+        var now = Date.now();
+        mudZones.forEach(function(m) {
+            if (m.until <= now) return;
+            var alpha = Math.min(0.5, (m.until - now) / 3000 * 0.5);
+            ctx.fillStyle = 'rgba(139, 92, 10, ' + alpha + ')';
+            ctx.fillRect(m.x, m.y, CELL_SIZE, CELL_SIZE);
+            // 泥沼纹理
+            ctx.fillStyle = 'rgba(100, 70, 10, ' + (alpha * 0.7) + ')';
+            ctx.fillRect(m.x + 2, m.y + 2, CELL_SIZE - 4, CELL_SIZE - 4);
         });
 
+        // 蛇
+        snake.forEach(function(seg, i) {
+            if (i === 0) {
+                // 蛇头：穿墙状态闪烁金色边框
+                if (wallPassUntil > now) {
+                    var flicker = Math.sin(now / 100) > 0;
+                    ctx.fillStyle = flicker ? '#0f0' : '#ffd700';
+                    ctx.strokeStyle = '#ffd700';
+                    ctx.lineWidth = 2;
+                    ctx.fillRect(seg.x + 1, seg.y + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+                    ctx.strokeRect(seg.x, seg.y, CELL_SIZE, CELL_SIZE);
+                    ctx.lineWidth = 0.5;
+                } else if (reverseUntil > now) {
+                    // 颠倒状态闪烁红色边框
+                    var rFlicker = Math.sin(now / 80) > 0;
+                    ctx.fillStyle = rFlicker ? '#0f0' : '#f66';
+                    ctx.strokeStyle = '#f44';
+                    ctx.lineWidth = 2;
+                    ctx.fillRect(seg.x + 1, seg.y + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+                    ctx.strokeRect(seg.x, seg.y, CELL_SIZE, CELL_SIZE);
+                    ctx.lineWidth = 0.5;
+                } else {
+                    ctx.fillStyle = '#0f0';
+                    ctx.fillRect(seg.x + 1, seg.y + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+                }
+            } else {
+                ctx.fillStyle = '#00f';
+                ctx.fillRect(seg.x + 1, seg.y + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+            }
+        });
+
+        // 普通食物
         ctx.fillStyle = '#f00';
         ctx.fillRect(food.x + 1, food.y + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+
+        // 特殊道具（带倒计时闪烁）
+        if (specialItem) {
+            var item = specialItem;
+            var elapsed = now - item.spawnTime;
+            var remaining = item.type.lifetime - elapsed;
+            // 最后2秒快速闪烁
+            var blink = remaining > 2000 || Math.floor(now / 200) % 2 === 0;
+
+            if (blink) {
+                // 背景色块
+                ctx.fillStyle = item.type.color;
+                ctx.fillRect(item.x + 1, item.y + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+
+                // 内部图标
+                ctx.fillStyle = '#000';
+                ctx.font = 'bold ' + (CELL_SIZE - 4) + 'px monospace';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(item.type.icon, item.x + CELL_SIZE/2, item.y + CELL_SIZE/2 + 1);
+
+                // 倒计时进度条（底部细条）
+                var progress = remaining / item.type.lifetime;
+                ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                ctx.fillRect(item.x + 2, item.y + CELL_SIZE - 4, (CELL_SIZE - 4) * progress, 2);
+            }
+        }
     }
 
     // ==================== 游戏循环 ====================
-    var lastTime = 0;
+    let lastTime = 0;
 
     function loop(timestamp) {
         if (!gameRunning) return;
         if (!lastTime) lastTime = timestamp;
-        var interval = 1000 / speed;
+
+        var effSpeed = getEffectiveSpeed();
+        var interval = 1000 / effSpeed;
+
         if (timestamp - lastTime >= interval) {
             lastTime = timestamp;
-            update();
+            update(timestamp);
         }
+
         draw();
         animationId = requestAnimationFrame(loop);
     }
 
-    function update() {
+    function update(now) {
         direction = { x: nextDirection.x, y: nextDirection.y };
         var head = snake[0];
         var newHead = {
@@ -861,52 +923,92 @@ canvas { display: block; max-width: 100%; height: auto; }
             y: head.y + direction.y * CELL_SIZE
         };
 
-        if (newHead.x < 0 || newHead.x >= WIDTH || newHead.y < 0 || newHead.y >= HEIGHT) {
-            endGame();
-            return;
+        // ---- 碰撞检测 ----
+        if (wallPassUntil > now) {
+            // 穿墙模式：环绕地图
+            if (newHead.x < 0) newHead.x = WIDTH - CELL_SIZE;
+            else if (newHead.x >= WIDTH) newHead.x = 0;
+            if (newHead.y < 0) newHead.y = HEIGHT - CELL_SIZE;
+            else if (newHead.y >= HEIGHT) newHead.y = 0;
+        } else {
+            // 正常模式：撞墙死亡
+            if (newHead.x < 0 || newHead.x >= WIDTH || newHead.y < 0 || newHead.y >= HEIGHT) {
+                endGame(); return;
+            }
         }
+
+        // 撞自己死亡（穿墙不能豁免）
         if (snake.some(function(seg) { return seg.x === newHead.x && seg.y === newHead.y; })) {
-            endGame();
-            return;
+            endGame(); return;
         }
 
         snake.unshift(newHead);
 
-        if (newHead.x === food.x && newHead.y === food.y) {
+        // ---- 道具碰撞检测 ----
+        var ateFood = (newHead.x === food.x && newHead.y === food.y);
+        var ateItem = specialItem && newHead.x === specialItem.x && newHead.y === specialItem.y;
+
+        if (ateFood) {
             score += 10;
             speed = Math.min(speed + 1, 25);
             food = generateFood();
-            // 吃食物时静默更新侧边栏（不刷新榜单以节省请求）
-            var level = speed - 9;
+            // 吃食物后尝试生成道具
+            trySpawnSpecialItem(now);
+            var lv = speed - 9;
             sidebarScoreEl.textContent = score;
-            sidebarLevelEl.textContent = level;
+            sidebarLevelEl.textContent = lv;
+            updateBuffDisplay();
         } else {
             snake.pop();
+        }
+
+        // 吃道具
+        if (ateItem) {
+            var itemType = specialItem.type;
+            clearSpecialItem();
+            applyItemEffect(itemType);
+            sidebarScoreEl.textContent = score;
+            sidebarLevelEl.textContent = speed - 9;
+            updateBuffDisplay();
+        }
+
+        // 道具超时消失
+        if (specialItem) {
+            if (now - specialItem.spawnTime >= specialItem.type.lifetime) {
+                clearSpecialItem();
+                updateBuffDisplay();
+            }
+        }
+
+        // 清理过期泥沼
+        mudZones = mudZones.filter(function(m) { return m.until > now; });
+
+        // 过期效果自动清除
+        if (wallPassUntil && wallPassUntil <= now) { wallPassUntil = 0; updateBuffDisplay(); }
+        if (reverseUntil && reverseUntil <= now) { reverseUntil = 0; updateBuffDisplay(); }
+
+        // 冷却结束后尝试生成（如果还没道具）
+        if (!specialItem && now >= itemCooldownUntil) {
+            trySpawnSpecialItem(now);
         }
     }
 
     async function endGame() {
         gameRunning = false;
-        if (animationId) {
-            cancelAnimationFrame(animationId);
-            animationId = null;
-        }
+        if (animationId) { cancelAnimationFrame(animationId); animationId = null; }
         lastTime = 0;
-
-        // 游戏结束：异步提交并展示
+        // 清除所有道具状态
+        specialItem = null; itemCooldownUntil = 0;
+        wallPassUntil = 0; reverseUntil = 0; mudZones = [];
+        updateBuffDisplay();
         await showGameOverOverlayAsync();
-        // 刷新侧边栏榜单
         await refreshSidebarLeaderboard();
     }
 
     // ==================== 游戏初始化 ====================
     async function initGame() {
-        // 校验昵称
         var nick = getValidatedNickname();
-        if (!nick) {
-            nicknameInput.focus();
-            return;
-        }
+        if (!nick) { nicknameInput.focus(); return; }
         playerNickname = nick;
         saveNickname(nick);
 
@@ -921,12 +1023,18 @@ canvas { display: block; max-width: 100%; height: auto; }
         nextDirection = { x: 1, y: 0 };
         score = 0;
         speed = 10;
+        specialItem = null;
+        itemCooldownUntil = 0;
+        wallPassUntil = 0;
+        reverseUntil = 0;
+        mudZones = [];
         food = generateFood();
         gameRunning = true;
         gameStarted = true;
         lastTime = 0;
 
         sidebarPlayerEl.textContent = '玩家: ' + playerNickname;
+        updateBuffDisplay();
         hideOverlays();
         draw();
 
@@ -936,88 +1044,59 @@ canvas { display: block; max-width: 100%; height: auto; }
 
     // ==================== 键盘事件 ====================
     document.addEventListener('keydown', function(e) {
-        // 如果在输入框中，不处理游戏按键
         if (document.activeElement === nicknameInput) return;
-
         if (!gameRunning) {
             if (e.key === 'r' || e.key === 'R') {
                 if (!startOverlay.classList.contains('hidden') || !gameOverOverlay.classList.contains('hidden')) {
-                    if (gameStarted) {
-                        initGame();
-                    }
+                    if (gameStarted) initGame();
                 }
             }
             return;
         }
-
         switch (e.key) {
-            case 'ArrowUp':    case 'w': case 'W': setDirection(0, -1); e.preventDefault(); break;
-            case 'ArrowDown':  case 's': case 'S': setDirection(0,  1); e.preventDefault(); break;
-            case 'ArrowLeft':  case 'a': case 'A': setDirection(-1, 0); e.preventDefault(); break;
-            case 'ArrowRight': case 'd': case 'D': setDirection(1,  0); e.preventDefault(); break;
+            case 'ArrowUp': case 'w': case 'W': setDirection(0, -1); e.preventDefault(); break;
+            case 'ArrowDown': case 's': case 'S': setDirection(0, 1); e.preventDefault(); break;
+            case 'ArrowLeft': case 'a': case 'A': setDirection(-1, 0); e.preventDefault(); break;
+            case 'ArrowRight': case 'd': case 'D': setDirection(1, 0); e.preventDefault(); break;
         }
     });
 
-    // ==================== 虚拟方向键事件 ====================
+    // ==================== 虚拟方向键 ====================
     dpad.querySelectorAll('.dpad-btn[data-dir]').forEach(function(btn) {
         btn.addEventListener('pointerdown', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+            e.preventDefault(); e.stopPropagation();
             btn.classList.add('active');
             var dir = btn.getAttribute('data-dir');
             switch (dir) {
-                case 'up':    setDirection(0, -1); break;
-                case 'down':  setDirection(0,  1); break;
-                case 'left':  setDirection(-1, 0); break;
-                case 'right': setDirection(1,  0); break;
+                case 'up': setDirection(0, -1); break;
+                case 'down': setDirection(0, 1); break;
+                case 'left': setDirection(-1, 0); break;
+                case 'right': setDirection(1, 0); break;
             }
         });
-        btn.addEventListener('pointerup', function(e) {
-            e.preventDefault();
-            btn.classList.remove('active');
-        });
-        btn.addEventListener('pointerleave', function(e) {
-            btn.classList.remove('active');
-        });
-        btn.addEventListener('pointercancel', function(e) {
-            btn.classList.remove('active');
-        });
+        btn.addEventListener('pointerup', function(e) { e.preventDefault(); btn.classList.remove('active'); });
+        btn.addEventListener('pointerleave', function(e) { btn.classList.remove('active'); });
+        btn.addEventListener('pointercancel', function(e) { btn.classList.remove('active'); });
     });
-    dpad.addEventListener('touchmove', function(e) {
-        e.preventDefault();
-    }, { passive: false });
+    dpad.addEventListener('touchmove', function(e) { e.preventDefault(); }, { passive: false });
 
     // ==================== 画布自适应 ====================
     function resizeCanvas() {
         if (window.innerWidth <= 768) {
-            var padding = 16;
-            var maxDisplayWidth = Math.min(window.innerWidth - padding, 640);
-            var scale = maxDisplayWidth / WIDTH;
-            canvas.style.width = maxDisplayWidth + 'px';
-            canvas.style.height = (HEIGHT * scale) + 'px';
+            var maxW = Math.min(window.innerWidth - 16, 640);
+            canvas.style.width = maxW + 'px';
+            canvas.style.height = (HEIGHT * maxW / WIDTH) + 'px';
         } else {
-            canvas.style.width = '';
-            canvas.style.height = '';
+            canvas.style.width = ''; canvas.style.height = '';
         }
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
     // ==================== 按钮事件 ====================
-    document.getElementById('btnStart').addEventListener('click', function() {
-        initGame();
-    });
-    document.getElementById('btnRestart').addEventListener('click', function() {
-        initGame();
-    });
-
-    // 刷新榜单按钮
-    document.getElementById('btnRefresh').addEventListener('click', function() {
-        refreshSidebarLeaderboard();
-        showToast('🔄 榜单已刷新');
-    });
-
-    // 榜单 Tab 切换
+    document.getElementById('btnStart').addEventListener('click', function() { initGame(); });
+    document.getElementById('btnRestart').addEventListener('click', function() { initGame(); });
+    document.getElementById('btnRefresh').addEventListener('click', function() { refreshSidebarLeaderboard(); showToast('🔄 榜单已刷新'); });
     document.querySelectorAll('.leaderboard-tab').forEach(function(tab) {
         tab.addEventListener('click', function() {
             document.querySelectorAll('.leaderboard-tab').forEach(function(t) { t.classList.remove('active'); });
@@ -1026,23 +1105,16 @@ canvas { display: block; max-width: 100%; height: auto; }
             refreshSidebarLeaderboard();
         });
     });
-
-    // 昵称输入实时校验提示
     nicknameInput.addEventListener('input', function() {
-        var err = validateNickname(nicknameInput.value);
-        nicknameErrorEl.textContent = err || '';
+        nicknameErrorEl.textContent = validateNickname(nicknameInput.value) || '';
     });
-    // 回车快速开始
-    nicknameInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            initGame();
-        }
-    });
+    nicknameInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') initGame(); });
 
     // ==================== 初始加载 ====================
     (async function initLoad() {
         restoreNickname();
         await refreshSidebarLeaderboard();
+        updateBuffDisplay();
         draw();
     })();
 })();
