@@ -518,6 +518,8 @@ canvas { display: block; max-width: 100%; height: auto; }
     let wallPassUntil = 0;            // 穿墙效果结束时间戳
     let reverseUntil = 0;             // 颠倒效果结束时间戳
     let mudZones = [];                // 泥沼区域 [{x, y, until}]
+    let foodCount = 0;                // 吃到的食物总数（用于非对称速度曲线）
+    let slowPenalty = 0;              // 减速道具累计惩罚值
 
     // ==================== Toast ====================
     let toastTimer = null;
@@ -644,7 +646,7 @@ canvas { display: block; max-width: 100%; height: auto; }
         overNicknameEl.textContent = '玩家: ' + playerNickname;
     }
     async function updateSidebar() {
-        var level = speed - 9;
+        var level = calcLevelFromFood();
         sidebarScoreEl.textContent = score;
         sidebarLevelEl.textContent = level;
         sidebarPlayerEl.textContent = playerNickname ? '玩家: ' + playerNickname : '';
@@ -652,7 +654,7 @@ canvas { display: block; max-width: 100%; height: auto; }
         await refreshSidebarLeaderboard();
     }
     async function showGameOverOverlayAsync() {
-        var level = speed - 9;
+        var level = calcLevelFromFood();
         overScoreEl.textContent = '最终分数: ' + score;
         overLevelEl.textContent = '等级: ' + level;
         overNicknameEl.textContent = '玩家: ' + playerNickname;
@@ -696,8 +698,13 @@ canvas { display: block; max-width: 100%; height: auto; }
         var cumulative = 0;
         var chosen = null;
         var types = Object.values(ITEM_TYPES);
+        // 速度 > 23 时，提高减速道具出现概率（0.10→0.25），其他道具按比例缩减
+        var slowBoost = (speed > 23) ? 0.25 : ITEM_TYPES.SLOW.prob;
+        var slowOrig = ITEM_TYPES.SLOW.prob;
+        var otherScale = (speed > 23) ? (0.48 - slowBoost) / (0.48 - slowOrig) : 1;
         for (var i = 0; i < types.length; i++) {
-            cumulative += types[i].prob;
+            var prob = types[i].id === 'slow' ? slowBoost : types[i].prob * otherScale;
+            cumulative += prob;
             if (roll < cumulative) { chosen = types[i]; break; }
         }
         if (!chosen) return;
@@ -735,7 +742,8 @@ canvas { display: block; max-width: 100%; height: auto; }
                 score += itemType.score;
                 break;
             case 'slow':
-                speed = Math.max(8, speed + itemType.speedDelta);
+                slowPenalty += 3;
+                speed = Math.max(5, speed - 3);
                 break;
             case 'wallpass':
                 wallPassUntil = now + itemType.effectDuration;
@@ -771,6 +779,26 @@ canvas { display: block; max-width: 100%; height: auto; }
         var head = snake[0];
         if (!head) return false;
         return mudZones.some(function(m) { return m.x === head.x && m.y === head.y && m.until > now; });
+    }
+
+    // ================================================
+    //  非对称速度曲线 - 前10级+1，之后每2食物+0.5
+    // ================================================
+    // 根据 foodCount 计算当前速度（初始10，最高25）
+    function calcSpeedFromFood() {
+        var base;
+        if (foodCount <= 10) {
+            base = 10 + foodCount;        // 0食物→10, 10食物→20
+        } else {
+            var extra = foodCount - 10;
+            base = 20 + Math.floor(extra / 2) * 0.5;  // 11→20.5, 12→20.5, 13→21...
+        }
+        base = Math.min(base, 25);  // 上限 25 FPS
+        return Math.max(5, base - slowPenalty);  // 减速道具永久扣除
+    }
+    // 根据 foodCount 计算显示等级（每吃一个食物+1级）
+    function calcLevelFromFood() {
+        return foodCount + 1;  // 初始1级，吃1个变2级
     }
 
     function getEffectiveSpeed() {
@@ -952,11 +980,12 @@ canvas { display: block; max-width: 100%; height: auto; }
 
         if (ateFood) {
             score += 10;
-            speed = Math.min(speed + 1, 25);
+            foodCount++;
+            speed = calcSpeedFromFood();     // 非对称速度曲线
             food = generateFood();
             // 吃食物后尝试生成道具
             trySpawnSpecialItem();
-            var lv = speed - 9;
+            var lv = calcLevelFromFood();
             sidebarScoreEl.textContent = score;
             sidebarLevelEl.textContent = lv;
             updateBuffDisplay();
@@ -970,7 +999,7 @@ canvas { display: block; max-width: 100%; height: auto; }
             clearSpecialItem();
             applyItemEffect(itemType);
             sidebarScoreEl.textContent = score;
-            sidebarLevelEl.textContent = speed - 9;
+            sidebarLevelEl.textContent = calcLevelFromFood();
             updateBuffDisplay();
         }
 
@@ -1024,6 +1053,8 @@ canvas { display: block; max-width: 100%; height: auto; }
         direction = { x: 1, y: 0 };
         nextDirection = { x: 1, y: 0 };
         score = 0;
+        foodCount = 0;
+        slowPenalty = 0;
         speed = 10;
         specialItem = null;
         itemCooldownUntil = 0;
