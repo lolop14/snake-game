@@ -685,7 +685,8 @@ canvas { display: block; max-width: 100%; height: auto; }
     // ================================================
     //  特殊道具系统 - 道具生成
     // ================================================
-    function trySpawnSpecialItem(now) {
+    function trySpawnSpecialItem() {
+        var now = Date.now();
         // 已有道具或冷却中，不生成
         if (specialItem) return;
         if (now < itemCooldownUntil) return;
@@ -908,14 +909,15 @@ canvas { display: block; max-width: 100%; height: auto; }
 
         if (timestamp - lastTime >= interval) {
             lastTime = timestamp;
-            update(timestamp);
+            update();
         }
 
         draw();
         animationId = requestAnimationFrame(loop);
     }
 
-    function update(now) {
+    function update() {
+        var now = Date.now();
         direction = { x: nextDirection.x, y: nextDirection.y };
         var head = snake[0];
         var newHead = {
@@ -953,7 +955,7 @@ canvas { display: block; max-width: 100%; height: auto; }
             speed = Math.min(speed + 1, 25);
             food = generateFood();
             // 吃食物后尝试生成道具
-            trySpawnSpecialItem(now);
+            trySpawnSpecialItem();
             var lv = speed - 9;
             sidebarScoreEl.textContent = score;
             sidebarLevelEl.textContent = lv;
@@ -974,7 +976,7 @@ canvas { display: block; max-width: 100%; height: auto; }
 
         // 道具超时消失
         if (specialItem) {
-            if (now - specialItem.spawnTime >= specialItem.type.lifetime) {
+            if (Date.now() - specialItem.spawnTime >= specialItem.type.lifetime) {
                 clearSpecialItem();
                 updateBuffDisplay();
             }
@@ -989,7 +991,7 @@ canvas { display: block; max-width: 100%; height: auto; }
 
         // 冷却结束后尝试生成（如果还没道具）
         if (!specialItem && now >= itemCooldownUntil) {
-            trySpawnSpecialItem(now);
+            trySpawnSpecialItem();
         }
     }
 
