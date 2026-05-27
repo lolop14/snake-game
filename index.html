@@ -38,13 +38,13 @@ canvas { display: block; max-width: 100%; height: auto; }
     border-radius: 8px;
     padding: 20px;
     color: #fff;
-    min-width: 200px;
+    min-width: 240px;
 }
 .sidebar h3 {
     text-align: center;
     margin-bottom: 12px;
     color: #e94560;
-    font-size: 18px;
+    font-size: 16px;
     border-bottom: 1px solid #333;
     padding-bottom: 8px;
 }
@@ -53,25 +53,61 @@ canvas { display: block; max-width: 100%; height: auto; }
     font-size: 28px;
     font-weight: bold;
     color: #0f0;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
+}
+.sidebar .player-name {
+    text-align: center;
+    font-size: 13px;
+    color: #e94560;
+    margin-bottom: 4px;
 }
 .sidebar .level-box {
     text-align: center;
     font-size: 14px;
     color: #aaa;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
+
+/* 榜单 Tab 切换 */
+.leaderboard-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 10px;
+}
+.leaderboard-tab {
+    flex: 1;
+    padding: 6px 4px;
+    font-size: 12px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background: transparent;
+    color: #888;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    text-align: center;
+}
+.leaderboard-tab.active {
+    background: #e94560;
+    color: #fff;
+    border-color: #e94560;
+}
+.leaderboard-tab:hover:not(.active) { color: #ccc; border-color: #555; }
+
 .sidebar .leaderboard-list {
     list-style: none;
+    max-height: 240px;
+    overflow-y: auto;
 }
 .sidebar .leaderboard-list li {
     display: flex;
     justify-content: space-between;
-    padding: 6px 8px;
-    margin: 3px 0;
+    padding: 5px 8px;
+    margin: 2px 0;
     background: #0f3460;
     border-radius: 4px;
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 1.4;
 }
 .sidebar .leaderboard-list li:nth-child(1) { color: #ffd700; }
 .sidebar .leaderboard-list li:nth-child(2) { color: #c0c0c0; }
@@ -79,45 +115,114 @@ canvas { display: block; max-width: 100%; height: auto; }
 .sidebar .leaderboard-empty {
     text-align: center;
     color: #666;
-    font-size: 13px;
+    font-size: 12px;
     padding: 20px 0;
 }
+.leaderboard-note {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+}
+.refresh-btn {
+    display: block;
+    margin: 8px auto 0;
+    padding: 4px 16px;
+    font-size: 11px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background: transparent;
+    color: #888;
+    cursor: pointer;
+    font-family: inherit;
+}
+.refresh-btn:hover { color: #fff; border-color: #777; }
+
 .controls-hint {
-    margin-top: 16px;
+    margin-top: 12px;
     font-size: 12px;
     color: #666;
     text-align: center;
 }
+
+/* 覆盖层 */
 .overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
+    background: rgba(0,0,0,0.88);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #fff;
+    overflow-y: auto;
+    padding: 20px;
 }
 .overlay.hidden { display: none; }
-.overlay .title { font-size: 36px; color: #e94560; margin-bottom: 10px; }
-.overlay .subtitle { font-size: 16px; color: #ccc; margin-bottom: 30px; }
-.overlay .over-score { font-size: 22px; color: #0f0; margin-bottom: 6px; }
-.overlay .over-level { font-size: 14px; color: #aaa; margin-bottom: 20px; }
-.overlay .over-leaderboard { width: 260px; margin-bottom: 20px; }
+.overlay .title { font-size: 32px; color: #e94560; margin-bottom: 8px; }
+.overlay .subtitle { font-size: 14px; color: #ccc; margin-bottom: 20px; }
+
+/* 昵称输入 */
+.nickname-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.nickname-wrap label {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 6px;
+}
+.nickname-input {
+    width: 200px;
+    padding: 8px 12px;
+    font-size: 16px;
+    text-align: center;
+    border: 2px solid #444;
+    border-radius: 6px;
+    background: #111;
+    color: #fff;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.nickname-input:focus { border-color: #e94560; }
+.nickname-error {
+    font-size: 12px;
+    color: #f66;
+    margin-top: 4px;
+    min-height: 18px;
+}
+
+.overlay .over-score { font-size: 20px; color: #0f0; margin-bottom: 4px; }
+.overlay .over-level { font-size: 14px; color: #aaa; margin-bottom: 14px; }
+
+.overlay .over-leaderboard {
+    width: 280px;
+    margin-bottom: 14px;
+}
 .overlay .over-leaderboard h4 {
-    text-align: center; color: #e94560; margin-bottom: 8px; font-size: 15px;
+    text-align: center; color: #e94560; margin-bottom: 6px; font-size: 14px;
 }
 .overlay .over-leaderboard ol {
-    list-style: none; font-size: 13px;
+    list-style: none; font-size: 12px;
+    max-height: 200px;
+    overflow-y: auto;
 }
 .overlay .over-leaderboard ol li {
     display: flex; justify-content: space-between;
-    padding: 4px 10px; margin: 2px 0;
+    padding: 3px 8px; margin: 2px 0;
     background: rgba(255,255,255,0.08); border-radius: 4px;
+    line-height: 1.4;
 }
 .overlay .over-leaderboard ol li:nth-child(1) { color: #ffd700; }
 .overlay .over-leaderboard ol li:nth-child(2) { color: #c0c0c0; }
 .overlay .over-leaderboard ol li:nth-child(3) { color: #cd7f32; }
+.overlay .over-nickname {
+    font-size: 14px; color: #e94560; margin-bottom: 4px;
+}
+
 .btn {
     padding: 10px 30px;
     font-size: 16px;
@@ -127,15 +232,47 @@ canvas { display: block; max-width: 100%; height: auto; }
     font-family: inherit;
     transition: background 0.2s;
 }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-start { background: #e94560; color: #fff; }
-.btn-start:hover { background: #c73a52; }
+.btn-start:hover:not(:disabled) { background: #c73a52; }
 .btn-restart { background: #0f3460; color: #fff; margin-bottom: 8px; }
-.btn-restart:hover { background: #1a4a7a; }
-.overlay .hint { font-size: 12px; color: #666; margin-top: 12px; }
+.btn-restart:hover:not(:disabled) { background: #1a4a7a; }
+.overlay .hint { font-size: 12px; color: #666; margin-top: 10px; }
+
+/* Toast 提示 */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 13px;
+    z-index: 999;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    font-family: "Microsoft YaHei", "SimHei", "PingFang SC", Arial, sans-serif;
+}
+.toast.hidden { opacity: 0; }
+
+/* 加载旋转器 */
+.spinner {
+    display: inline-block;
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ========== 虚拟方向键 ========== */
 .dpad {
-    display: none;           /* 桌面端默认隐藏 */
+    display: none;
     margin-top: 16px;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
@@ -173,7 +310,6 @@ canvas { display: block; max-width: 100%; height: auto; }
 }
 .dpad-empty { background: transparent; border: none; pointer-events: none; }
 
-/* darshan-grid 定位 */
 .dpad-up    { grid-column: 2; grid-row: 1; }
 .dpad-left  { grid-column: 1; grid-row: 2; }
 .dpad-center{ grid-column: 2; grid-row: 2; }
@@ -192,92 +328,95 @@ canvas { display: block; max-width: 100%; height: auto; }
         max-width: 95vw;
         border-width: 2px;
     }
-    canvas {
-        max-width: 100%;
-        height: auto;
-    }
+    canvas { max-width: 100%; height: auto; }
     .sidebar {
         width: 100%;
         max-width: 95vw;
         min-width: auto;
         padding: 14px;
-        order: 1;  /* 信息面板放到最上面 */
+        order: 1;
     }
-    .sidebar h3 {
-        font-size: 15px;
-        margin-bottom: 8px;
-        padding-bottom: 5px;
-    }
-    .sidebar .score-box {
-        font-size: 22px;
-        margin-bottom: 4px;
-    }
-    .sidebar .level-box {
-        font-size: 12px;
-        margin-bottom: 10px;
-    }
-    .sidebar .leaderboard-list li {
-        padding: 4px 6px;
-        font-size: 11px;
-    }
+    .sidebar h3 { font-size: 14px; margin-bottom: 8px; padding-bottom: 5px; }
+    .sidebar .score-box { font-size: 22px; margin-bottom: 4px; }
+    .sidebar .level-box { font-size: 12px; margin-bottom: 10px; }
+    .sidebar .leaderboard-list li { padding: 4px 6px; font-size: 11px; }
+    .sidebar .leaderboard-list { max-height: 160px; }
     .controls-hint { display: none; }
     .dpad { display: block; }
-    .overlay .title { font-size: 26px; }
-    .overlay .subtitle { font-size: 14px; margin-bottom: 20px; }
-    .overlay .over-score { font-size: 18px; }
-    .overlay .over-level { font-size: 13px; }
-    .overlay .over-leaderboard { width: 220px; }
+    .overlay .title { font-size: 24px; }
+    .overlay .subtitle { font-size: 13px; margin-bottom: 16px; }
+    .overlay .over-score { font-size: 17px; }
+    .overlay .over-level { font-size: 12px; }
+    .overlay .over-leaderboard { width: 240px; }
+    .overlay .over-leaderboard ol { max-height: 140px; font-size: 11px; }
     .btn { padding: 8px 24px; font-size: 14px; }
+    .nickname-input { width: 170px; font-size: 14px; }
 }
 
-/* 超小屏进一步缩小 d-pad */
 @media (max-width: 380px) {
     .dpad-grid {
         grid-template-columns: 55px 55px 55px;
         grid-template-rows: 55px 55px 55px;
         gap: 3px;
     }
-    .dpad-btn {
-        width: 55px;
-        height: 55px;
-        font-size: 20px;
-    }
+    .dpad-btn { width: 55px; height: 55px; font-size: 20px; }
 }
 </style>
 </head>
 <body>
 
 <div class="game-wrapper">
-    <!-- 手机端信息面板（通过 order 在手机上放最上面） -->
+    <!-- 侧边栏信息面板 -->
     <div class="sidebar">
         <h3>📊 游戏信息</h3>
         <div class="score-box" id="sidebarScore">0</div>
+        <div class="player-name" id="sidebarPlayer"></div>
         <div class="level-box">等级: <span id="sidebarLevel">1</span></div>
-        <h3>🏆 排行榜</h3>
+
+        <!-- 榜单 Tab 切换 -->
+        <div class="leaderboard-tabs">
+            <button class="leaderboard-tab active" data-tab="cloud">☁️ 云端总榜</button>
+            <button class="leaderboard-tab" data-tab="local">💻 本地个人</button>
+        </div>
+
         <ul class="leaderboard-list" id="sidebarLeaderboard">
-            <li class="leaderboard-empty">暂无记录</li>
+            <li class="leaderboard-empty">加载中...</li>
         </ul>
+        <div class="leaderboard-note" id="leaderboardNote"></div>
+        <button class="refresh-btn" id="btnRefresh">🔄 刷新榜单</button>
         <div class="controls-hint">↑↓←→ 控制方向</div>
     </div>
 
+    <!-- 游戏画布 -->
     <div class="game-container" id="gameContainer">
         <canvas id="gameCanvas"></canvas>
 
-        <!-- 开始覆盖层 -->
+        <!-- 开始覆盖层（含昵称输入） -->
         <div class="overlay" id="startOverlay">
             <div class="title">🐍 贪吃蛇</div>
             <div class="subtitle">使用方向键 / 虚拟按键控制蛇的移动</div>
+            <div class="nickname-wrap">
+                <label for="nicknameInput">请输入你的昵称</label>
+                <input type="text" class="nickname-input" id="nicknameInput"
+                       placeholder="2-10个字符" maxlength="10" autocomplete="off">
+                <div class="nickname-error" id="nicknameError"></div>
+            </div>
             <button class="btn btn-start" id="btnStart">开始游戏</button>
         </div>
 
         <!-- 结束覆盖层 -->
         <div class="overlay hidden" id="gameOverOverlay">
             <div class="title">游戏结束！</div>
+            <div class="over-nickname" id="overNickname"></div>
             <div class="over-score" id="overScore">最终分数: 0</div>
             <div class="over-level" id="overLevel">等级: 1</div>
-            <div class="over-leaderboard">
-                <h4>🏆 排行榜 TOP5</h4>
-                <ol id="overLeaderboard"></ol>
+            <div class="over-leaderboard" id="overCloudBoard">
+                <h4>☁️ 云端总榜 TOP20</h4>
+                <ol id="overCloudList"></ol>
+            </div>
+            <div class="over-leaderboard" id="overLocalBoard">
+                <h4>💻 本地个人榜 TOP5</h4>
+                <ol id="overLocalList"></ol>
             </div>
             <button class="btn btn-restart" id="btnRestart">🔄 重新开始 (R)</button>
             <div class="hint">按 R 键重新开始</div>
@@ -296,15 +435,32 @@ canvas { display: block; max-width: 100%; height: auto; }
     </div>
 </div>
 
+<!-- Toast 提示 -->
+<div class="toast hidden" id="toast"></div>
+
 <script>
 (function() {
     // ==================== 游戏配置 ====================
     const WIDTH = 640;
     const HEIGHT = 480;
     const CELL_SIZE = 20;
-    const COLS = WIDTH / CELL_SIZE;  // 32
-    const ROWS = HEIGHT / CELL_SIZE; // 24
-    const LEADERBOARD_KEY = 'snake_leaderboard_v2';
+    const COLS = WIDTH / CELL_SIZE;
+    const ROWS = HEIGHT / CELL_SIZE;
+
+    // ================================================
+    //  全自动云端排行榜模块 - JSONBin.io 配置
+    // ================================================
+    const JSONBIN_BIN_ID = '6a16b8b2f47d5c455c3c53e3';
+    const JSONBIN_API_KEY = '$2a$10$SxtA6rQsL4UJoaIz2qWdLOEz5/qFEeusCOW7ufWyLseRM4aQodKKG';
+    const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/' + JSONBIN_BIN_ID;
+    const JSONBIN_HEADERS = {
+        'X-Master-Key': JSONBIN_API_KEY,
+        'Content-Type': 'application/json'
+    };
+
+    // 本地存储 key
+    const LOCAL_LEADERBOARD_KEY = 'snake_local_leaderboard_v3';
+    const LOCAL_NICKNAME_KEY = 'snake_nickname';
 
     // ==================== DOM 元素 ====================
     const canvas = document.getElementById('gameCanvas');
@@ -316,11 +472,18 @@ canvas { display: block; max-width: 100%; height: auto; }
     const gameOverOverlay = document.getElementById('gameOverOverlay');
     const overScoreEl = document.getElementById('overScore');
     const overLevelEl = document.getElementById('overLevel');
-    const overLeaderboardEl = document.getElementById('overLeaderboard');
+    const overNicknameEl = document.getElementById('overNickname');
+    const overCloudList = document.getElementById('overCloudList');
+    const overLocalList = document.getElementById('overLocalList');
     const sidebarScoreEl = document.getElementById('sidebarScore');
     const sidebarLevelEl = document.getElementById('sidebarLevel');
+    const sidebarPlayerEl = document.getElementById('sidebarPlayer');
     const sidebarLeaderboardEl = document.getElementById('sidebarLeaderboard');
+    const leaderboardNoteEl = document.getElementById('leaderboardNote');
+    const nicknameInput = document.getElementById('nicknameInput');
+    const nicknameErrorEl = document.getElementById('nicknameError');
     const dpad = document.getElementById('dpad');
+    const toastEl = document.getElementById('toast');
 
     // ==================== 游戏状态 ====================
     let snake = [];
@@ -328,84 +491,292 @@ canvas { display: block; max-width: 100%; height: auto; }
     let nextDirection = { x: 1, y: 0 };
     let food = { x: 0, y: 0 };
     let score = 0;
-    let speed = 10;        // 初始帧率（对应 pygame 中的 speed=10）
-    let gameLoop = null;
+    let speed = 10;
     let gameRunning = false;
     let gameStarted = false;
     let animationId = null;
+    let playerNickname = '';
+    let cloudOnline = false;          // 云端是否可用
+    let currentLeaderboardTab = 'cloud';  // 'cloud' | 'local'
 
-    // ==================== 排行榜 ====================
-    function loadLeaderboard() {
+    // ==================== Toast 提示 ====================
+    let toastTimer = null;
+    function showToast(msg, duration) {
+        duration = duration || 2000;
+        if (toastTimer) clearTimeout(toastTimer);
+        toastEl.textContent = msg;
+        toastEl.classList.remove('hidden');
+        toastTimer = setTimeout(function() {
+            toastEl.classList.add('hidden');
+        }, duration);
+    }
+
+    // ================================================
+    //  全自动云端排行榜模块 - 昵称校验
+    // ================================================
+    function validateNickname(name) {
+        if (!name || name.trim() === '') return '昵称不能为空';
+        if (name.trim().length < 2) return '昵称至少2个字符';
+        if (name.trim().length > 10) return '昵称最多10个字符';
+        // 过滤特殊符号：只允许中英文、数字、下划线、空格
+        if (!/^[\u4e00-\u9fa5a-zA-Z0-9_ ]+$/.test(name.trim())) return '昵称含非法字符，仅支持中英文、数字、下划线';
+        // 禁止使用 "system" 作为昵称
+        if (name.trim().toLowerCase() === 'system') return '昵称不能为 system';
+        return null; // 校验通过
+    }
+
+    function getValidatedNickname() {
+        var raw = nicknameInput.value;
+        var err = validateNickname(raw);
+        if (err) {
+            nicknameErrorEl.textContent = err;
+            return null;
+        }
+        nicknameErrorEl.textContent = '';
+        return raw.trim();
+    }
+
+    // 恢复上次昵称
+    function restoreNickname() {
         try {
-            const data = localStorage.getItem(LEADERBOARD_KEY);
+            var saved = localStorage.getItem(LOCAL_NICKNAME_KEY);
+            if (saved) nicknameInput.value = saved;
+        } catch(e) {}
+    }
+    function saveNickname(name) {
+        try {
+            localStorage.setItem(LOCAL_NICKNAME_KEY, name);
+        } catch(e) {}
+    }
+
+    // ================================================
+    //  全自动云端排行榜模块 - 本地存储
+    // ================================================
+    function loadLocalLeaderboard() {
+        try {
+            var data = localStorage.getItem(LOCAL_LEADERBOARD_KEY);
             if (!data) return [];
-            const parsed = JSON.parse(data);
-            return parsed.sort((a, b) => b.score - a.score).slice(0, 5);
-        } catch (e) {
-            return [];
+            return JSON.parse(data);
+        } catch(e) { return []; }
+    }
+
+    function saveLocalLeaderboard(list) {
+        var sorted = list.sort(function(a, b) { return b.score - a.score; }).slice(0, 5);
+        try {
+            localStorage.setItem(LOCAL_LEADERBOARD_KEY, JSON.stringify(sorted));
+        } catch(e) {}
+    }
+
+    function addToLocalLeaderboard(nickname, score, level) {
+        var list = loadLocalLeaderboard();
+        list.push({
+            nickname: nickname,
+            score: score,
+            level: level,
+            timestamp: new Date().toISOString()
+        });
+        saveLocalLeaderboard(list);
+    }
+
+    // ================================================
+    //  全自动云端排行榜模块 - JSONBin 云端读写
+    // ================================================
+    // 从 JSONBin 拉取云端排行榜，过滤 "system" 占位数据，返回按分数降序 TOP20
+    async function fetchCloudLeaderboard() {
+        var resp = await fetch(JSONBIN_URL + '/latest', {
+            method: 'GET',
+            headers: { 'X-Master-Key': JSONBIN_API_KEY }
+        });
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        var json = await resp.json();
+        // JSONBin v3 返回 { record: [...] }
+        var data = json.record;
+        if (!Array.isArray(data)) data = [];
+        // 过滤掉昵称等于 "system" 的占位数据
+        data = data.filter(function(entry) {
+            return entry.nickname && entry.nickname.toLowerCase() !== 'system';
+        });
+        // 按分数降序，取 TOP20
+        data.sort(function(a, b) { return b.score - a.score; });
+        return data.slice(0, 20);
+    }
+
+    // 提交新记录到云端，自动合并并去重（同一昵称只保留最高分）
+    async function submitToCloud(nickname, score, level) {
+        // 1. 先拉取最新数据
+        var resp = await fetch(JSONBIN_URL + '/latest', {
+            method: 'GET',
+            headers: { 'X-Master-Key': JSONBIN_API_KEY }
+        });
+        var json = await resp.json();
+        var list = json.record;
+        if (!Array.isArray(list)) list = [];
+
+        // 2. 过滤 system 占位数据
+        list = list.filter(function(entry) {
+            return entry.nickname && entry.nickname.toLowerCase() !== 'system';
+        });
+
+        // 3. 添加/更新当前玩家记录（同一昵称保留最高分）
+        var existingIdx = -1;
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].nickname === nickname) {
+                existingIdx = i;
+                break;
+            }
         }
-    }
-
-    function saveLeaderboard(leaderboard) {
-        const sorted = leaderboard.sort((a, b) => b.score - a.score).slice(0, 5);
-        localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(sorted));
-    }
-
-    function addToLeaderboard(score, level) {
-        const leaderboard = loadLeaderboard();
-        leaderboard.push({ score, level });
-        saveLeaderboard(leaderboard);
-    }
-
-    // ==================== 方向设置（统一入口，含反向防呆） ====================
-    function setDirection(dx, dy) {
-        if (!gameRunning) return;
-        // 防止反向移动
-        if (dx !== 0) {
-            // 水平移动时，当前方向不能反向
-            if (direction.x === -dx) return;
+        var newEntry = {
+            nickname: nickname,
+            score: score,
+            level: level,
+            timestamp: new Date().toISOString()
+        };
+        if (existingIdx >= 0) {
+            // 同一昵称取最高分
+            if (score > list[existingIdx].score) {
+                list[existingIdx] = newEntry;
+            }
         } else {
-            // 垂直移动时，当前方向不能反向
-            if (direction.y === -dy) return;
+            list.push(newEntry);
         }
-        nextDirection = { x: dx, y: dy };
+
+        // 4. PUT 整份数据回云端
+        var putResp = await fetch(JSONBIN_URL, {
+            method: 'PUT',
+            headers: JSONBIN_HEADERS,
+            body: JSON.stringify(list)
+        });
+        if (!putResp.ok) throw new Error('PUT HTTP ' + putResp.status);
     }
 
-    // ==================== UI 更新 ====================
-    function updateSidebar() {
-        const level = speed - 9;
+    // 带网络异常降级的云端数据拉取
+    async function loadCloudLeaderboardSafe() {
+        try {
+            var data = await fetchCloudLeaderboard();
+            cloudOnline = true;
+            return data;
+        } catch(e) {
+            console.warn('[云端排行榜] 网络不可用，降级到本地:', e.message);
+            cloudOnline = false;
+            return null;
+        }
+    }
+
+    // 带网络异常降级的云端数据提交
+    async function submitToCloudSafe(nickname, score, level) {
+        try {
+            await submitToCloud(nickname, score, level);
+            cloudOnline = true;
+            showToast('✅ 分数已同步到云端');
+        } catch(e) {
+            console.warn('[云端排行榜] 提交失败，已保存到本地:', e.message);
+            cloudOnline = false;
+            showToast('⚠️ 网络异常，分数已保存到本地');
+        }
+    }
+
+    // ================================================
+    //  全自动云端排行榜模块 - UI 渲染
+    // ================================================
+    // 格式化时间
+    function formatTime(isoStr) {
+        try {
+            var d = new Date(isoStr);
+            var m = d.getMonth() + 1;
+            var day = d.getDate();
+            var h = d.getHours();
+            var min = d.getMinutes();
+            if (min < 10) min = '0' + min;
+            return m + '/' + day + ' ' + h + ':' + min;
+        } catch(e) { return ''; }
+    }
+
+    // 渲染榜单 HTML 到容器
+    function renderLeaderboardList(container, data, isCloud) {
+        container.innerHTML = '';
+        if (!data || data.length === 0) {
+            var cls = isCloud ? '暂无云端数据' : '暂无本地记录';
+            container.innerHTML = '<li class="leaderboard-empty">' + cls + '</li>';
+            return;
+        }
+        var maxShow = isCloud ? 20 : 5;
+        var items = data.slice(0, maxShow);
+        items.forEach(function(entry, i) {
+            var li = document.createElement('li');
+            var rank = i + 1;
+            var timeStr = entry.timestamp ? formatTime(entry.timestamp) : '';
+            // 格式: 排名 昵称 | 分数 Lv等级 时间
+            li.innerHTML = '<span>' + rank + '. ' + escapeHtml(entry.nickname) + '</span>' +
+                           '<span>' + entry.score + '分 Lv' + entry.level +
+                           (timeStr ? ' <small style="color:#666">' + timeStr + '</small>' : '') + '</span>';
+            container.appendChild(li);
+        });
+    }
+
+    // 简易 HTML 转义
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>');
+    }
+
+    // 刷新侧边栏当前 Tab 的榜单
+    async function refreshSidebarLeaderboard() {
+        sidebarLeaderboardEl.innerHTML = '<li class="leaderboard-empty"><span class="spinner"></span>加载中...</li>';
+
+        if (currentLeaderboardTab === 'cloud') {
+            var cloudData = await loadCloudLeaderboardSafe();
+            if (cloudData) {
+                renderLeaderboardList(sidebarLeaderboardEl, cloudData, true);
+                leaderboardNoteEl.textContent = '☁️ 云端实时数据 · TOP20';
+            } else {
+                // 降级：显示本地数据
+                var localData = loadLocalLeaderboard();
+                renderLeaderboardList(sidebarLeaderboardEl, localData, false);
+                leaderboardNoteEl.textContent = '⚠️ 网络不可用，显示本地数据';
+            }
+        } else {
+            var localData = loadLocalLeaderboard();
+            renderLeaderboardList(sidebarLeaderboardEl, localData, false);
+            leaderboardNoteEl.textContent = '💻 本设备记录 · 最多5条';
+        }
+    }
+
+    // 刷新游戏结束覆盖层的两个榜单
+    async function refreshGameOverLeaderboards() {
+        // 云端榜
+        overCloudList.innerHTML = '<li class="leaderboard-empty"><span class="spinner"></span>加载中...</li>';
+        var cloudData = await loadCloudLeaderboardSafe();
+        renderLeaderboardList(overCloudList, cloudData, true);
+
+        // 本地榜
+        var localData = loadLocalLeaderboard();
+        renderLeaderboardList(overLocalList, localData, false);
+
+        overNicknameEl.textContent = '玩家: ' + playerNickname;
+    }
+
+    // 侧边栏更新（含榜单刷新）
+    async function updateSidebar() {
+        var level = speed - 9;
         sidebarScoreEl.textContent = score;
         sidebarLevelEl.textContent = level;
-
-        const leaderboard = loadLeaderboard();
-        sidebarLeaderboardEl.innerHTML = '';
-        if (leaderboard.length === 0) {
-            sidebarLeaderboardEl.innerHTML = '<li class="leaderboard-empty">暂无记录</li>';
-        } else {
-            leaderboard.forEach((entry, i) => {
-                const li = document.createElement('li');
-                li.innerHTML = '<span>' + (i + 1) + '. ' + entry.score + '分</span><span>Lv' + entry.level + '</span>';
-                sidebarLeaderboardEl.appendChild(li);
-            });
-        }
+        sidebarPlayerEl.textContent = playerNickname ? '玩家: ' + playerNickname : '';
+        await refreshSidebarLeaderboard();
     }
 
-    function showGameOverOverlay() {
-        const level = speed - 9;
+    // 游戏结束覆盖层显示（异步提交 + 刷新榜单）
+    async function showGameOverOverlayAsync() {
+        var level = speed - 9;
         overScoreEl.textContent = '最终分数: ' + score;
         overLevelEl.textContent = '等级: ' + level;
+        overNicknameEl.textContent = '玩家: ' + playerNickname;
 
-        const leaderboard = loadLeaderboard();
-        overLeaderboardEl.innerHTML = '';
-        if (leaderboard.length === 0) {
-            overLeaderboardEl.innerHTML = '<li style="padding:10px;text-align:center;color:#666;">暂无记录</li>';
-        } else {
-            leaderboard.forEach((entry, i) => {
-                const li = document.createElement('li');
-                li.innerHTML = '<span>' + (i + 1) + '. ' + entry.score + '分</span><span>等级' + entry.level + '</span>';
-                overLeaderboardEl.appendChild(li);
-            });
-        }
+        // 先提交到云端和本地（异步进行）
+        addToLocalLeaderboard(playerNickname, score, level);
+        await submitToCloudSafe(playerNickname, score, level);
+
+        // 刷新展示榜单
+        await refreshGameOverLeaderboards();
 
         gameOverOverlay.classList.remove('hidden');
     }
@@ -415,12 +786,23 @@ canvas { display: block; max-width: 100%; height: auto; }
         gameOverOverlay.classList.add('hidden');
     }
 
+    // ==================== 方向设置（统一入口，含反向防呆） ====================
+    function setDirection(dx, dy) {
+        if (!gameRunning) return;
+        if (dx !== 0) {
+            if (direction.x === -dx) return;
+        } else {
+            if (direction.y === -dy) return;
+        }
+        nextDirection = { x: dx, y: dy };
+    }
+
     // ==================== 食物生成 ====================
     function generateFood() {
         while (true) {
-            const x = Math.floor(Math.random() * COLS) * CELL_SIZE;
-            const y = Math.floor(Math.random() * ROWS) * CELL_SIZE;
-            const pos = { x, y };
+            var x = Math.floor(Math.random() * COLS) * CELL_SIZE;
+            var y = Math.floor(Math.random() * ROWS) * CELL_SIZE;
+            var pos = { x: x, y: y };
             if (!snake.some(function(seg) { return seg.x === x && seg.y === y; })) {
                 return pos;
             }
@@ -434,13 +816,13 @@ canvas { display: block; max-width: 100%; height: auto; }
 
         ctx.strokeStyle = '#111';
         ctx.lineWidth = 0.5;
-        for (let x = 0; x <= WIDTH; x += CELL_SIZE) {
+        for (var x = 0; x <= WIDTH; x += CELL_SIZE) {
             ctx.beginPath();
             ctx.moveTo(x, 0);
             ctx.lineTo(x, HEIGHT);
             ctx.stroke();
         }
-        for (let y = 0; y <= HEIGHT; y += CELL_SIZE) {
+        for (var y = 0; y <= HEIGHT; y += CELL_SIZE) {
             ctx.beginPath();
             ctx.moveTo(0, y);
             ctx.lineTo(WIDTH, y);
@@ -457,28 +839,24 @@ canvas { display: block; max-width: 100%; height: auto; }
     }
 
     // ==================== 游戏循环 ====================
-    let lastTime = 0;
+    var lastTime = 0;
 
     function loop(timestamp) {
         if (!gameRunning) return;
-
         if (!lastTime) lastTime = timestamp;
-        const interval = 1000 / speed;
-
+        var interval = 1000 / speed;
         if (timestamp - lastTime >= interval) {
             lastTime = timestamp;
             update();
         }
-
         draw();
         animationId = requestAnimationFrame(loop);
     }
 
     function update() {
         direction = { x: nextDirection.x, y: nextDirection.y };
-
-        const head = snake[0];
-        const newHead = {
+        var head = snake[0];
+        var newHead = {
             x: head.x + direction.x * CELL_SIZE,
             y: head.y + direction.y * CELL_SIZE
         };
@@ -487,7 +865,6 @@ canvas { display: block; max-width: 100%; height: auto; }
             endGame();
             return;
         }
-
         if (snake.some(function(seg) { return seg.x === newHead.x && seg.y === newHead.y; })) {
             endGame();
             return;
@@ -499,13 +876,16 @@ canvas { display: block; max-width: 100%; height: auto; }
             score += 10;
             speed = Math.min(speed + 1, 25);
             food = generateFood();
-            updateSidebar();
+            // 吃食物时静默更新侧边栏（不刷新榜单以节省请求）
+            var level = speed - 9;
+            sidebarScoreEl.textContent = score;
+            sidebarLevelEl.textContent = level;
         } else {
             snake.pop();
         }
     }
 
-    function endGame() {
+    async function endGame() {
         gameRunning = false;
         if (animationId) {
             cancelAnimationFrame(animationId);
@@ -513,16 +893,25 @@ canvas { display: block; max-width: 100%; height: auto; }
         }
         lastTime = 0;
 
-        const level = speed - 9;
-        addToLeaderboard(score, level);
-        updateSidebar();
-        showGameOverOverlay();
+        // 游戏结束：异步提交并展示
+        await showGameOverOverlayAsync();
+        // 刷新侧边栏榜单
+        await refreshSidebarLeaderboard();
     }
 
     // ==================== 游戏初始化 ====================
-    function initGame() {
-        const startX = Math.floor(COLS / 2) * CELL_SIZE;
-        const startY = Math.floor(ROWS / 2) * CELL_SIZE;
+    async function initGame() {
+        // 校验昵称
+        var nick = getValidatedNickname();
+        if (!nick) {
+            nicknameInput.focus();
+            return;
+        }
+        playerNickname = nick;
+        saveNickname(nick);
+
+        var startX = Math.floor(COLS / 2) * CELL_SIZE;
+        var startY = Math.floor(ROWS / 2) * CELL_SIZE;
         snake = [
             { x: startX, y: startY },
             { x: startX - CELL_SIZE, y: startY },
@@ -537,7 +926,7 @@ canvas { display: block; max-width: 100%; height: auto; }
         gameStarted = true;
         lastTime = 0;
 
-        updateSidebar();
+        sidebarPlayerEl.textContent = '玩家: ' + playerNickname;
         hideOverlays();
         draw();
 
@@ -547,6 +936,9 @@ canvas { display: block; max-width: 100%; height: auto; }
 
     // ==================== 键盘事件 ====================
     document.addEventListener('keydown', function(e) {
+        // 如果在输入框中，不处理游戏按键
+        if (document.activeElement === nicknameInput) return;
+
         if (!gameRunning) {
             if (e.key === 'r' || e.key === 'R') {
                 if (!startOverlay.classList.contains('hidden') || !gameOverOverlay.classList.contains('hidden')) {
@@ -566,13 +958,13 @@ canvas { display: block; max-width: 100%; height: auto; }
         }
     });
 
-    // ==================== 虚拟方向键事件（pointer 同时支持触摸和鼠标） ====================
+    // ==================== 虚拟方向键事件 ====================
     dpad.querySelectorAll('.dpad-btn[data-dir]').forEach(function(btn) {
         btn.addEventListener('pointerdown', function(e) {
             e.preventDefault();
             e.stopPropagation();
             btn.classList.add('active');
-            const dir = btn.getAttribute('data-dir');
+            var dir = btn.getAttribute('data-dir');
             switch (dir) {
                 case 'up':    setDirection(0, -1); break;
                 case 'down':  setDirection(0,  1); break;
@@ -580,22 +972,17 @@ canvas { display: block; max-width: 100%; height: auto; }
                 case 'right': setDirection(1,  0); break;
             }
         });
-
         btn.addEventListener('pointerup', function(e) {
             e.preventDefault();
             btn.classList.remove('active');
         });
-
         btn.addEventListener('pointerleave', function(e) {
             btn.classList.remove('active');
         });
-
         btn.addEventListener('pointercancel', function(e) {
             btn.classList.remove('active');
         });
     });
-
-    // 防止 d-pad 区域触发页面滚动
     dpad.addEventListener('touchmove', function(e) {
         e.preventDefault();
     }, { passive: false });
@@ -603,29 +990,61 @@ canvas { display: block; max-width: 100%; height: auto; }
     // ==================== 画布自适应 ====================
     function resizeCanvas() {
         if (window.innerWidth <= 768) {
-            // 手机端：缩放 canvas 显示尺寸以适配屏幕
-            const padding = 16;
-            const maxDisplayWidth = Math.min(window.innerWidth - padding, 640);
-            const scale = maxDisplayWidth / WIDTH;
+            var padding = 16;
+            var maxDisplayWidth = Math.min(window.innerWidth - padding, 640);
+            var scale = maxDisplayWidth / WIDTH;
             canvas.style.width = maxDisplayWidth + 'px';
             canvas.style.height = (HEIGHT * scale) + 'px';
         } else {
-            // 桌面端：保持原始尺寸
             canvas.style.width = '';
             canvas.style.height = '';
         }
     }
-
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
     // ==================== 按钮事件 ====================
-    document.getElementById('btnStart').addEventListener('click', initGame);
-    document.getElementById('btnRestart').addEventListener('click', initGame);
+    document.getElementById('btnStart').addEventListener('click', function() {
+        initGame();
+    });
+    document.getElementById('btnRestart').addEventListener('click', function() {
+        initGame();
+    });
 
-    // ==================== 初始渲染 ====================
-    updateSidebar();
-    draw();
+    // 刷新榜单按钮
+    document.getElementById('btnRefresh').addEventListener('click', function() {
+        refreshSidebarLeaderboard();
+        showToast('🔄 榜单已刷新');
+    });
+
+    // 榜单 Tab 切换
+    document.querySelectorAll('.leaderboard-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.leaderboard-tab').forEach(function(t) { t.classList.remove('active'); });
+            tab.classList.add('active');
+            currentLeaderboardTab = tab.getAttribute('data-tab');
+            refreshSidebarLeaderboard();
+        });
+    });
+
+    // 昵称输入实时校验提示
+    nicknameInput.addEventListener('input', function() {
+        var err = validateNickname(nicknameInput.value);
+        nicknameErrorEl.textContent = err || '';
+    });
+    // 回车快速开始
+    nicknameInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            initGame();
+        }
+    });
+
+    // ==================== 初始加载 ====================
+    (async function initLoad() {
+        restoreNickname();
+        await refreshSidebarLeaderboard();
+        draw();
+    })();
 })();
 </script>
 </body>
